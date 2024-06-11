@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.vita.oauth.mapper.RefreshMapper">  
+  
+   
+   <select id="existsByRefresh">
+   	SELECT
+	    tocken_id,
+	    username,
+	    refresh,
+	    expiration,
+	    id
+	FROM
+	    refresh_tocken
+	WHERE refresh = #{refresh}
+   </select>
+     
+   <insert id="save">
+   	  INSERT INTO refresh_tocken (
+		    tocken_id,
+		    username,
+		    refresh,
+		    expiration,
+		    id
+		) VALUES (
+		    (SELECT NVL(MAX(tocken_id), 0) + 1 FROM refresh_tocken),
+		    #{username},
+		    #{refresh},
+		    #{expiration},
+		    #{id}
+		)
+   </insert>
+    
+</mapper>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
